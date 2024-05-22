@@ -1,6 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import connectDB from './config/db.js';
+import userRouter from './routes/userRoutes.js';
 
 dotenv.config();
 
@@ -11,6 +12,8 @@ const dbURL = process.env.MONGO_DB_URL;
 const PORT = process.env.PORT;
 
 connectDB(dbURL);
+
+app.use("/api/users", userRouter);
 
 app.get("/", (req, res) => {
     res.send("Welcome to the API");
