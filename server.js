@@ -2,6 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import connectDB from './config/db.js';
 import userRouter from './routes/userRoutes.js';
+import postRouter from './routes/postRoutes.js';
 
 dotenv.config();
 
@@ -14,6 +15,7 @@ const PORT = process.env.PORT;
 connectDB(dbURL);
 
 app.use("/api/users", userRouter);
+app.use("/api/posts", postRouter);
 
 app.get("/", (req, res) => {
     res.send("Welcome to the API");
