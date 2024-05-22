@@ -1,7 +1,7 @@
 import Post from "../models/postModel.js";
 import User from "../models/userModel.js";
 
-const createPost = async (req, res) => {
+const createPost = async (req, res, next) => {
     try {
         const { userId, title } = req.body;
 
@@ -16,16 +16,16 @@ const createPost = async (req, res) => {
 
         res.status(201).json({ message: "Post created successfully", newPost });
     } catch (error) {
-        res.status(500).json({ message: error.message })
+        next(error);
     }
 };
 
-const getAllPosts = async (req, res) => {
+const getAllPosts = async (req, res, next) => {
     try {
         const allPosts = await Post.find().populate('user');
         res.status(200).json({ message: "All posts fetched successfully", allPosts });
     } catch (error) {
-        res.status(500).json({ message: error.message })
+        next(error);
     }
 };
 
