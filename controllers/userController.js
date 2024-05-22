@@ -8,6 +8,15 @@ const createUser = async (req, res) => {
     } catch (error) {
         res.status(500).json({ message: error.message })
     }
+};
+
+const getAllUsers = async (req, res) => {
+    try {
+        const allUsers = await User.find().populate('posts');
+        res.status(200).json({ message: "All users fetched successfully", allUsers });
+    } catch (error) {
+        res.status(500).json({ message: error.message })
+    }
 }
 
-export { createUser };
+export { createUser, getAllUsers };
