@@ -18,6 +18,15 @@ const createPost = async (req, res) => {
     } catch (error) {
         res.status(500).json({ message: error.message })
     }
-}
+};
 
-export { createPost };
+const getAllPosts = async (req, res) => {
+    try {
+        const allPosts = await Post.find().populate('user');
+        res.status(200).json({ message: "All posts fetched successfully", allPosts });
+    } catch (error) {
+        res.status(500).json({ message: error.message })
+    }
+};
+
+export { createPost, getAllPosts };
